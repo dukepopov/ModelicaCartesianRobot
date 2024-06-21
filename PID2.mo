@@ -59,22 +59,34 @@ model CBody
     Placement(transformation(origin = {-30, -86}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Mechanics.Translational.Sensors.ForceSensor forceSensor1 annotation(
     Placement(transformation(origin = {94, -26}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Math.Product product annotation(
-    Placement(transformation(origin = {-78, -64}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  Modelica.Blocks.Sources.Constant const(k = 100)  annotation(
-    Placement(transformation(origin = {-98, -42}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Logical.Less less1 annotation(
-    Placement(transformation(origin = {-156, -14}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Logical.Not not1 annotation(
-    Placement(transformation(origin = {-124, -14}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Math.BooleanToReal booleanToReal(realTrue = 1, realFalse = 0) annotation(
-    Placement(transformation(origin = {-94, -14}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Constant const11(k = 5) annotation(
-    Placement(transformation(origin = {-188, 8}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Mechanics.Translational.Sensors.PositionSensor positionSensor annotation(
-    Placement(transformation(origin = {-188, -38}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Mechanics.Translational.Sources.Force force annotation(
-    Placement(transformation(origin = {-62, -86}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {-166, -62}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Logical.Greater greater annotation(
+    Placement(transformation(origin = {-154, -116}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Sources.Constant const1(k = 1) annotation(
+    Placement(transformation(origin = {-200, -124}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Logical.Switch switch1 annotation(
+    Placement(transformation(origin = {-106, -120}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Math.Gain gain(k = 100) annotation(
+    Placement(transformation(origin = {-70, -120}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Sources.Constant const2(k = 0) annotation(
+    Placement(transformation(origin = {-150, -146}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Mechanics.Translational.Sources.Force2 force annotation(
+    Placement(transformation(origin = {-68, -90}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Math.Product product annotation(
+    Placement(transformation(origin = {-78, -40}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+  Modelica.Blocks.Sources.Constant const3(k = 100) annotation(
+    Placement(transformation(origin = {-108, -20}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Logical.Less less1 annotation(
+    Placement(transformation(origin = {-166, 8}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Logical.Not not1 annotation(
+    Placement(transformation(origin = {-134, 8}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Math.BooleanToReal booleanToReal(realFalse = 0, realTrue = 1) annotation(
+    Placement(transformation(origin = {-104, 8}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Sources.Constant const11(k = 1) annotation(
+    Placement(transformation(origin = {-198, 30}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Mechanics.Translational.Sources.Force2 force1 annotation(
+    Placement(transformation(origin = {-40, -120}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(sine1.y, position1.s_ref) annotation(
     Line(points = {{69, 88}, {72, 88}}, color = {0, 0, 127}));
@@ -144,26 +156,46 @@ equation
     Line(points = {{-34, 6}, {-34, 20}, {-30, 20}}, color = {95, 95, 95}));
   connect(forceSensor.flange_b, prismatic.axis) annotation(
     Line(points = {{-20, -86}, {-20, -62}, {-36, -62}}, color = {0, 127, 0}));
-  connect(const.y, product.u2) annotation(
-    Line(points = {{-87, -42}, {-84, -42}, {-84, -52}}, color = {0, 0, 127}));
-  connect(less1.y, not1.u) annotation(
-    Line(points = {{-145, -14}, {-137, -14}}, color = {255, 0, 255}));
-  connect(not1.y, booleanToReal.u) annotation(
-    Line(points = {{-113, -14}, {-107, -14}}, color = {255, 0, 255}));
-  connect(booleanToReal.y, product.u1) annotation(
-    Line(points = {{-82, -14}, {-72, -14}, {-72, -52}}, color = {0, 0, 127}));
   connect(positionSensor.flange, prismatic.axis) annotation(
-    Line(points = {{-198, -38}, {-198, -62}, {-36, -62}}, color = {0, 127, 0}));
-  connect(force.flange, forceSensor.flange_a) annotation(
-    Line(points = {{-52, -86}, {-40, -86}}, color = {0, 127, 0}));
-  connect(force.f, product.y) annotation(
-    Line(points = {{-74, -86}, {-78, -86}, {-78, -74}}, color = {0, 0, 127}));
-  connect(positionSensor.s, less1.u2) annotation(
-    Line(points = {{-176, -38}, {-176, -22}, {-168, -22}}, color = {0, 0, 127}));
+    Line(points = {{-176, -62}, {-36, -62}}, color = {0, 127, 0}));
+  connect(positionSensor.s, greater.u1) annotation(
+    Line(points = {{-154, -62}, {-166, -62}, {-166, -116}}, color = {0, 0, 127}));
+  connect(const1.y, greater.u2) annotation(
+    Line(points = {{-188, -124}, {-166, -124}}, color = {0, 0, 127}));
+  connect(greater.y, switch1.u2) annotation(
+    Line(points = {{-142, -116}, {-118, -116}, {-118, -120}}, color = {255, 0, 255}));
+  connect(const2.y, switch1.u3) annotation(
+    Line(points = {{-138, -146}, {-118, -146}, {-118, -128}}, color = {0, 0, 127}));
+  connect(positionSensor.s, switch1.u1) annotation(
+    Line(points = {{-154, -62}, {-136, -62}, {-136, -112}, {-118, -112}}, color = {0, 0, 127}));
+  connect(switch1.y, gain.u) annotation(
+    Line(points = {{-94, -120}, {-82, -120}}, color = {0, 0, 127}));
+  connect(force.flange_b, forceSensor.flange_a) annotation(
+    Line(points = {{-58, -90}, {-40, -90}, {-40, -86}}, color = {0, 127, 0}));
+  connect(force.flange_a, prismatic.support) annotation(
+    Line(points = {{-78, -90}, {-78, -62}, {-48, -62}}, color = {0, 127, 0}));
+  connect(const3.y, product.u2) annotation(
+    Line(points = {{-97, -20}, {-84, -20}, {-84, -28}}, color = {0, 0, 127}));
+  connect(less1.y, not1.u) annotation(
+    Line(points = {{-155, 8}, {-147, 8}}, color = {255, 0, 255}));
+  connect(not1.y, booleanToReal.u) annotation(
+    Line(points = {{-123, 8}, {-117, 8}}, color = {255, 0, 255}));
+  connect(booleanToReal.y, product.u1) annotation(
+    Line(points = {{-93, 8}, {-72, 8}, {-72, -28}}, color = {0, 0, 127}));
   connect(const11.y, less1.u1) annotation(
-    Line(points = {{-176, 8}, {-176, -14}, {-168, -14}}, color = {0, 0, 127}));
+    Line(points = {{-187, 30}, {-187, 8}, {-179, 8}}, color = {0, 0, 127}));
+  connect(positionSensor.s, less1.u2) annotation(
+    Line(points = {{-154, -62}, {-178, -62}, {-178, 0}}, color = {0, 0, 127}));
+  connect(product.y, force.f) annotation(
+    Line(points = {{-78, -50}, {-68, -50}, {-68, -86}}, color = {0, 0, 127}));
+  connect(gain.y, force1.f) annotation(
+    Line(points = {{-58, -120}, {-60, -120}, {-60, -116}, {-40, -116}}, color = {0, 0, 127}));
+  connect(force1.flange_b, force.flange_a) annotation(
+    Line(points = {{-30, -120}, {-30, -102}, {-78, -102}, {-78, -90}}, color = {0, 127, 0}));
+  connect(force1.flange_a, force.flange_b) annotation(
+    Line(points = {{-50, -120}, {-58, -120}, {-58, -90}}, color = {0, 127, 0}));
   annotation(
     uses(Modelica(version = "4.0.0")),
-  Diagram(coordinateSystem(extent = {{-240, 100}, {120, -180}})),
-  version = "");
+    Diagram(coordinateSystem(extent = {{-240, 100}, {120, -180}})),
+    version = "");
 end CBody;
